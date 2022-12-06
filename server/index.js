@@ -26,6 +26,22 @@ app.get('/api/getCars', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.post('/api/saveCar', (req, res, next) => {
+  const { make, model, color, year } = req.body;
+  const sql = `
+  insert into "cars" ("make", "model",  "color", "year")
+  values ($1, $2, $3, $4)
+  returning *
+  `;
+
+  const sqlParams = [make, model, color, year];
+
+  db.query(sql, sqlParams)
+    .then(result => res.status(201).json(result.rows))
+    .catch(err => next(err));
+
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
