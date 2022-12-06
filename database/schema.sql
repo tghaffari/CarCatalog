@@ -11,8 +11,7 @@ create schema "public";
 	"make" TEXT NOT NULL,
 	"model" TEXT NOT NULL,
 	"color" TEXT NOT NULL,
-	"year" int NOT NULL,
-	"savedAt" timestamptz NOT NULL
+	"year" int NOT NULL
 ) WITH (
   OIDS=FALSE
 );
