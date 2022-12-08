@@ -4,7 +4,7 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      inventory: null
+      cars: null
     };
     this.getCars = this.getCars.bind(this);
   }
@@ -12,7 +12,10 @@ export default class Home extends React.Component {
   getCars() {
     fetch('api/getCars')
       .then(res => res.json())
-      .then(cars => console.log(cars));
+      .then(cars => {
+        console.log(cars);
+        this.setState({ cars });
+      });
   }
 
   componentDidMount() {
@@ -20,8 +23,14 @@ export default class Home extends React.Component {
   }
 
   render() {
+    if (!this.state.cars) return null;
 
-    if (!this.state.inventory) return null;
+    return (
+      <>
+        <h1 className="title">Car Catalog</h1>
+        <div />
+      </>
+    );
 
   }
 }
