@@ -25,10 +25,34 @@ export default class Home extends React.Component {
   render() {
     if (!this.state.cars) return null;
 
+    const tableBody = this.state.cars.map(car => {
+      return (
+        <tr key={car.carId}>
+          <td> {car.make}</td>
+          <td> {car.model}</td>
+          <td> {car.year}</td>
+          <td> {car.color}</td>
+        </tr>
+      );
+    });
+
     return (
       <>
         <h1 className="title">Car Catalog</h1>
-        <div />
+        <div className="line"/>
+        <table className = "table">
+          <thead>
+            <tr>
+              <th className='header-styling'>Make</th>
+              <th className='header-styling'>Model</th>
+              <th className='header-styling'>Year</th>
+              <th className='header-styling'>Color</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tableBody}
+          </tbody>
+        </table>
       </>
     );
 
