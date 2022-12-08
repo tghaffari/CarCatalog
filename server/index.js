@@ -27,6 +27,8 @@ app.get('/api/getCars', (req, res, next) => {
 });
 
 app.post('/api/saveCar', (req, res, next) => {
+
+  // add error handling (make fields required and send a message if missing)
   const { make, model, color, year } = req.body;
   const sql = `
   insert into "cars" ("make", "model",  "color", "year")

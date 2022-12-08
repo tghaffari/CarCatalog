@@ -13,7 +13,6 @@ export default class Home extends React.Component {
     fetch('api/getCars')
       .then(res => res.json())
       .then(cars => {
-        console.log(cars);
         this.setState({ cars });
       });
   }
@@ -27,29 +26,29 @@ export default class Home extends React.Component {
 
     const tableBody = this.state.cars.map(car => {
       return (
-        <tr key={car.carId}>
-          <td> {car.make}</td>
-          <td> {car.model}</td>
-          <td> {car.year}</td>
-          <td> {car.color}</td>
+        <tr key={car.carId} className='table-row'>
+          <td className='table-data'> {car.make}</td>
+          <td className='table-data'> {car.model}</td>
+          <td className='table-data'> {car.year}</td>
+          <td className='table-data'> {car.color}</td>
         </tr>
       );
     });
 
     return (
       <>
-        <h1 className="title">Car Catalog</h1>
-        <div className="line"/>
-        <table className = "table">
+        <h1 className='title'>Car Catalog</h1>
+        <div className='line'/>
+        <table className = 'table'>
           <thead>
-            <tr>
+            <tr className='table-header'>
               <th className='header-styling'>Make</th>
               <th className='header-styling'>Model</th>
               <th className='header-styling'>Year</th>
               <th className='header-styling'>Color</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className='table-body'>
             {tableBody}
           </tbody>
         </table>
