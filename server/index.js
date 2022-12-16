@@ -41,7 +41,6 @@ app.post('/api/saveCar', (req, res, next) => {
   db.query(sql, sqlParams)
     .then(result => res.status(201).json(result.rows))
     .catch(err => next(err));
-
 });
 
 app.use(errorMiddleware);
