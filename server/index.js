@@ -2,6 +2,7 @@ require('dotenv/config');
 const express = require('express');
 const staticMiddleware = require('./static-middleware');
 const errorMiddleware = require('./error-middleware');
+const ClientError = require('./client-error');
 const pg = require('pg');
 
 const db = new pg.Pool({
@@ -28,8 +29,11 @@ app.get('/api/getCars', (req, res, next) => {
 
 app.post('/api/saveCar', (req, res, next) => {
 
-  // add error handling (make fields required and send a message if missing)
   const { make, model, color, year } = req.body;
+  if (!make || !model || !color || !year) {
+    throw new ClientError(400, 'make, model, color, and year are required fields');
+  }
+
   const sql = `
   insert into "cars" ("make", "model",  "color", "year")
   values ($1, $2, $3, $4)
